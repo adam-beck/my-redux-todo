@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import todoApp from './reducers';
+import configureStore from './store/configureStore';
 import App from './components/App';
 
-let store = createStore(todoApp);
+import DevTools from './containers/DevTools';
+
+let store = configureStore();
 
 render(
   <Provider store={store}>
-    <App />
+    <div>
+      <App />
+      <DevTools />
+    </div>
   </Provider>,
   document.getElementById('app')
 );
