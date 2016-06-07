@@ -5,7 +5,7 @@ const path = require('path');
 const server = new Server();
 server.connection({
   host: '0.0.0.0',
-  port: 5555
+  port: 4000
 });
 
 server.register([require('h2o2'), require('inert'), {
@@ -24,23 +24,23 @@ server.register([require('h2o2'), require('inert'), {
    */
   server.route({
     method: '*',
-    path: '/api/{all*}',
+    path: '/{all*}',
     handler: {
       proxy: {
         mapUri: (request, callback) => {
-          callback(null, `http://0.0.0.0:5005/${request.params.all || ''}`);
+          callback(null, `http://0.0.0.0:4040/${request.params.all || ''}`);
         }
       }
     }
   });
 
-  server.route({
-    method: '*',
-    path: '/{all*}',
-    handler: (request, reply) => {
-      reply.file(path.resolve(__dirname, '..', 'index.html'));
-    }
-  });
+  // server.route({
+  //   method: '*',
+  //   path: '/{all*}',
+  //   handler: (request, reply) => {
+  //     reply.file(path.resolve(__dirname, '..', 'index.html'));
+  //   }
+  // });
 
   server.start(() => console.log(`Server running at: ${server.info.uri}`));
 });
