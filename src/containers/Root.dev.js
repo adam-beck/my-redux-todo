@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Provider } from 'react-redux';
 import App from '../components/App';
 import DevTools from './DevTools';
 
-export default class Root extends Component {
+class Root extends Component {
   render() {
     const { store } = this.props;
     return (
@@ -16,3 +16,9 @@ export default class Root extends Component {
     );
   }
 }
+
+Root.propTypes = {
+  store: PropTypes.object.isRequired
+};
+
+export default Root;
