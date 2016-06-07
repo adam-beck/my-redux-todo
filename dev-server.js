@@ -5,12 +5,12 @@ const path = require('path');
 const server = new Server();
 server.connection({
   host: '0.0.0.0',
-  port: 4000
+  port: 4040
 });
 
 server.register([require('h2o2'), require('inert'), {
   register: WebpackPlugin,
-  options: path.resolve(__dirname, '../webpack/webpack.config.js')
+  options: path.resolve(__dirname, 'webpack/webpack.config.js')
 }], error => {
   if (error) {
     return console.error(error);
@@ -28,19 +28,11 @@ server.register([require('h2o2'), require('inert'), {
     handler: {
       proxy: {
         mapUri: (request, callback) => {
-          callback(null, `http://0.0.0.0:4040/${request.params.all || ''}`);
+          callback(null, `http://0.0.0.0:8080/${request.params.all || ''}`);
         }
       }
     }
   });
-
-  // server.route({
-  //   method: '*',
-  //   path: '/{all*}',
-  //   handler: (request, reply) => {
-  //     reply.file(path.resolve(__dirname, '..', 'index.html'));
-  //   }
-  // });
 
   server.start(() => console.log(`Server running at: ${server.info.uri}`));
 });
