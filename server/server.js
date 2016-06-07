@@ -1,6 +1,7 @@
 'use strict';
 
 const Hapi = require('hapi');
+const plugins = require('./plugins');
 
 const server = new Hapi.Server();
 server.connection({
@@ -18,11 +19,14 @@ server.route({
   }
 });
 
-server.start(err => {
+server.register(plugins, () => {
 
-  if (err) {
-    throw err;
-  }
+  server.start(err => {
 
-  console.log(`Server running at: ${server.info.uri}`);
+    if (err) {
+      throw err;
+    }
+
+    server.log(`Server running at: ${server.info.uri}`);
+  });
 });

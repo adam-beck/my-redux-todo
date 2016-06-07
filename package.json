@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon server/server.js"
+    "dev": "nodemon server/server.js",
+    "lint:app": "eslint src/",
+    "lint:server": "eslint server/"
   },
   "keywords": [],
   "author": "",
@@ -29,6 +31,9 @@
     "webpack": "^1.13.0"
   },
   "dependencies": {
+    "good": "^7.0.1",
+    "good-console": "^6.1.2",
+    "good-squeeze": "^3.0.1",
     "hapi": "^13.3.0",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
