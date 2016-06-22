@@ -7,10 +7,10 @@ const server = new WebpackDevServer(webpack(config), {
   hot: true,
   historyApiFallback: true,
   proxy: {
-    '*': 'http://localhost:8080'
+    '**': 'http://localhost:8080'
   }
 });
-  
+
 server.listen(4040, '0.0.0.0', (err, result) => {
   if (err) {
     return console.log(err);
